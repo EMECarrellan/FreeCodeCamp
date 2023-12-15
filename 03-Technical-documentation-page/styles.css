@@ -1,0 +1,111 @@
+* {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+header {
+    font-size: 2em;
+    padding: 0.5em 0 0 0;
+}
+
+main p, li, code, a {
+    color: rgb(106, 106, 106);
+    line-height: 150%;
+    padding: 1em 0 0 0;
+    margin-left: 1em;
+}
+
+code {
+    display: block;
+    margin: 1em 0 0 2em;
+    padding: 1.5em 1em;
+
+    background-color:#f7f7f7;
+
+    font-size: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    line-height: 200%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 6em;
+}
+
+main {
+    padding: 0 2em;
+    box-sizing: border-box;
+}
+
+#navbar header {
+    text-align: center;
+}
+
+#navbar {
+    width: 100%;
+}
+
+#navbar div {
+    margin-top: 1em;
+    height: 200px;
+    border-width: 2px 1px;
+    border-style: solid;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+#navbar a:first-of-type {
+    border-top: 0;
+}
+
+#navbar div a {
+    border-top: 1px solid black;
+    padding: 0.725em 0 0.725em 2em;
+}
+
+@media (min-width: 576px) {
+    
+    .container {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        height: 100%;
+        margin-bottom: 6em;
+    }
+    main {
+        position: absolute;
+        margin-left: 310px;
+    }
+
+    #navbar {
+        position: fixed;
+        min-width: 290px;
+        width: 300px;
+        height: 100%;
+        border-right: 2px solid #aaaaaa;
+
+    }
+
+    #navbar div {
+        margin-top: 1em;
+        height: 100%;
+        border-width: 0;
+        border-style: none;
+        overflow-y: auto;
+    }
+
+    #navbar div a {
+        padding-left: 2em;
+        margin-left: 0;
+    }
+
+    #navbar a:first-of-type {
+        border-top: 1px solid black;
+    }
+}

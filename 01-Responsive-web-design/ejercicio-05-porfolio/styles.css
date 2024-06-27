@@ -1,0 +1,211 @@
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+}
+
+:root {
+    --main-color: rgb(112, 66, 20) ;
+    --background-color: #fdf5e6 ;
+    --secondary-color:  #FFA07A ;
+    --porfolio-background-color: #FFDAB9;
+}
+
+/* Barra de navegación */
+
+nav {
+    display: flex;
+    position: fixed;
+    height: 72px;
+    width: 100%;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 0 rgba(112, 66, 20, 0.4);
+}
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    color: var(--background-color);
+    font-size: 21px;
+    padding: 0 1em;
+    height: 100%;
+}
+
+nav a:hover {
+    color: var(--background-color);
+    background-color: var(--main-color);
+}
+
+/* Hero */
+
+h1 {
+    font-size: 48px;
+    text-align: center;
+}
+
+#welcome-section p {
+    font-size: 24px;
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary-color);
+}
+
+div#welcome-section, div#contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em;
+    gap: 1em;
+    height: 100vh;
+    background-color: var(--background-color);
+    color: var(--main-color);
+}
+
+/* Apartado de proyectos */
+
+div#projects > h2 {
+    border-bottom: 0.075em solid var(--main-color);
+    text-align: center;
+    padding-bottom: 0.5em;
+    margin-bottom: 1.5em;
+}
+
+div#projects {
+    padding: 2em 1em;
+    background-color: var(--porfolio-background-color);
+    color: var(--main-color);
+}
+
+div.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 2em;
+    gap: 3em;
+}
+
+div.project-tile {
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+div.project-tile > img {
+    height: calc(100% - 6.8rem);
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+div.project-tile p {
+    padding: 2rem 0.5rem;
+    background-color: var(--background-color);
+    color: var(--main-color);
+    text-align: center;
+    font-size: 1.25em;
+}
+
+#projects.projects-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Botón de ver todos los proyectos */
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    width: fit-content;
+    padding: 0.5em 1em;
+
+    font-size: 1.25em;
+    text-align: center;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border-radius: 6px;
+}
+
+.button:hover {
+    color: var(--secondary-color);
+    background-color: var(--background-color);
+}
+
+a#profile-link.button span{
+    font-size: 28px;
+}
+
+/* Página de contacto */
+
+#contact {
+    text-align: center;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1em;
+}
+
+.contact-links a {
+    padding: 1em;
+    font-size: 21px;
+    color: var(--main-color);
+    transition: transform 0.3s ease-out;
+}
+
+.contact-links a:hover {
+    transform: translateY(8px);
+    text-decoration: underline;
+}
+
+.contact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+#contact h2 {
+    font-size: 36px;
+}
+
+div#contact p {
+    font-style: italic;
+}
+
+/* Footer */
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1em;
+    border-top: 0.1em solid var(--secondary-color);
+    background-color: var(--background-color);
+}
+
+footer p {
+    margin: 1em 2em;
+    color: var(--main-color);
+}
+
+@media screen and (min-width: 768px) {
+    .nav-links {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    div.projects-grid {
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}

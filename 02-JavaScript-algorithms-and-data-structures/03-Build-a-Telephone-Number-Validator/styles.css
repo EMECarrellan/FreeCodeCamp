@@ -64,6 +64,10 @@ body {
                 cursor: pointer;
                 transition: box-shadow 0.2s;
 
+                svg {
+                    color: hsl(161, 10%, 10%);
+                }
+                
                 &:focus {
                     box-shadow: none;
                 }
@@ -71,25 +75,18 @@ body {
                 &:first-child {
                     border-radius: 8px 0 0 8px;
                     background: hsl(60, 31%, 94%);
-
-                    svg {
-                        color: hsl(161, 10%, 10%);
-                    }
                 }
 
                 &:last-child{
                     border-radius: 0 8px 8px 0;
                     background: rgb(19, 212, 151);
-                    
-                    svg {
-                        color: hsl(68, 44%, 87%);
-                    }
                 }
             }
         }
         
         span {
             margin-top: 24px;
+            min-height: 1.5em;
             text-align: center;
             font-weight: 600;
         }

@@ -1,0 +1,16 @@
+body {
+    display: grid;
+    place-content: center;
+    align-self: center;
+
+    height: 100dvh;
+}
+
+#change-due {
+    min-height: 24px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

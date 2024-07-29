@@ -14,6 +14,9 @@ let cid = [ //change in drawer, borrar comentario al terminar
 const cash = document.getElementById("cash");
 const purchaseBtn = document.getElementById("purchase-btn")
 const changeDue = document.getElementById("change-due")
+const total = document.getElementById("total")
+
+total.textContent = `Total: $${price}`
 
 purchaseBtn.onclick = e => {
     e.preventDefault()

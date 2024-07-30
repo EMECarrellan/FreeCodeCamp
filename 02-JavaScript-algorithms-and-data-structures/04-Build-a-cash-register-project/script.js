@@ -1,4 +1,4 @@
-let price = 1.86;
+let price = 1.00;
 let cid = [ //change in drawer, borrar comentario al terminar
     ['PENNY', 1.01],
     ['NICKEL', 2.05],
@@ -21,33 +21,65 @@ total.textContent = `Total: $${price}`
 purchaseBtn.onclick = e => {
     e.preventDefault()
 
-    const change = (cash.value * 100 - price * 100) / 100
+    const change = (cash.value * 100 - price * 100)
     
     if (price > cash.value) {
         alert("Customer does not have enough money to purchase the item")
     } else if (price == cash.value) {
-        alert("No change due - customer paid with exact cash")
-        changeDue.textContent = "Status: CLOSED"
+        changeDue.innerHTML = "No change due - customer paid with exact cash"
     } else {
-        console.log(change)
-        changeCalc(cid, change)
+        calculateChange(cid, change)
     }
 }
 
 
 
-const changeCalc = (currentCid, change) => {
-    const cidValues = currentCid.map(money => {
-        return money.filter(element => typeof element === "number")[0];
-    }).reduce((acc, curr) => (acc * 100 + curr * 100) / 100, 0);
-    // Bien, pero hay que hacer otra función que calcule realmente lo que hay en el cid (aquí calculamos la cantidad de esa unidad de dinero, no estamos teniendo en cuenta lo que vale esa cantidad)
-    // Entonces hay que mapear pero para el valor que tiene realmente el primer elemento multiplicarlo por el segundo. Si es ONE, nada, si es nickel * 5... y así hasta los 100$
-    // Creo que será mejor idea multiplicar todo * 100 y luego encargarse de dividirlo, si no el manejo hasta el dolar puede ser un dolor de cabeza
-    // Ej si tenemos 1.01 pennies -> 1.01 * 100 = 101, 2.05 nickels * 5 * 100 = 1025 + 101 = 1126 / 100 = 11.26$
-    // Se podría dar el valor por === 'PENNY' o noséqué[0] y ya multiplicar por lo que sea necesario
-      // Sumamos todos los valores numéricos
-    if (change > cidValues) {
-        changeDue.textContent = "Status: INSUFFICIENT_FUNDS"
+const calculateChange = (cid, change) => {
+    const denominations = [
+        ['ONE HUNDRED', 10000],
+        ['TWENTY', 2000],
+        ['TEN', 1000],
+        ['FIVE', 500],
+        ['ONE', 100],
+        ['QUARTER', 25],
+        ['DIME', 10],
+        ['NICKEL', 5],
+        ['PENNY', 1]
+    ];
+
+    let totalCid = 0
+
+    let cidInPennies = cid.map(([name, amount]) => [name, Math.round(amount * 100)]);
+    cidInPennies.forEach(value => totalCid += value[1]);
+
+    if (change > totalCid) {
+        return changeDue.textContent = "Status: INSUFFICIENT_FUNDS"
+    }
+    
+    let changeArray = []
+
+    for (let [name, value] of denominations) {
+        let amountInDrawer = cidInPennies.find(item => item[0] === name)[1]
+        let amountToGive = 0;
+        while (change >= value && amountInDrawer > 0) {
+            change -= value
+            amountInDrawer -= value
+            amountToGive += value
+        }
+        if (amountToGive > 0) {
+            changeArray.push([name, amountToGive / 100]);
+            let originalIndex = cid.findIndex(item => item[0] === name);
+            cid[originalIndex][1] -= amountToGive / 100;
+        }
+    }
+
+
+    if (change > 0) {
+        changeDue.innerHTML = "<p>Status: INSUFFICIENT_FUNDS</p>";
+    } else if (changeArray.reduce((acc, curr) => acc + curr[1] * 100, 0) === totalCid) {
+        changeDue.innerHTML = `<p>Status: CLOSED</p> ${changeArray.map(item => `<p>${item[0]}: $${item[1].toFixed(2)}</p>`).reverse().join(' ')}`;
+    } else {
+        changeDue.innerHTML = `<p>Status: OPEN</p> ${changeArray.map(item => `<p>${item[0]}: $${item[1].toFixed(2)}</p>`).reverse().join(' ')}`;
     }
 }
 

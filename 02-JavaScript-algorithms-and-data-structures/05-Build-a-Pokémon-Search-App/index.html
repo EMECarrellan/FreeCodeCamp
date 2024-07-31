@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buscador de Pokémon que muestra información detallada sobre cada Pokémon.">
+    <title>Buscador de Pokémon</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Buscador de Pokémon</h1>
+        <p>Ingresa el nombre de un Pokémon para obtener información detallada.</p>
+    </header>
+
+    <main>
+        <section id="search-section">
+            <label for="search-input">Nombre del Pokémon:</label>
+            <input type="text" id="search-input" placeholder="Gyarados" required>
+            <button id="search-button">Buscar</button>
+        </section>
+
+        <section id="pokemon-info">
+            <div>
+            <h2>Información del Pokémon</h2>
+                <h3>Nombre:</h3>
+                <p id="pokemon-name"></p>
+            </div>
+            <div>
+                <h3>ID:</h3>
+                <p id="pokemon-id"></p>
+            </div>
+            <div>
+                <h3>Peso:</h3>
+                <p id="weight"></p>
+            </div>
+            <div>
+                <h3>Altura:</h3>
+                <p id="height"></p>
+            </div>
+            <div>
+                <h3>Tipos:</h3>
+                <p id="types"></p>
+            </div>
+            <div>
+                <h3>HP:</h3>
+                <p id="hp"></p>
+            </div>
+            <div>
+                <h3>Attack:</h3>
+                <p id="attack"></p>
+            </div>
+            <div>
+                <h3>Defensa:</h3>
+                <p id="defense"></p>
+            </div>
+            <div>
+                <h3>Ataque Especial:</h3>
+                <p id="special-attack"></p>
+            </div>
+            <div>
+                <h3>Defensa Especial:</h3>
+                <p id="special-defense"></p>
+            </div>
+            <div>
+                <h3>Velocidad:</h3>
+                <p id="speed"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>EmeCarrellan - 2024 Buscador de Pokémon.</p>
+    </footer>
+</body>
+</html>

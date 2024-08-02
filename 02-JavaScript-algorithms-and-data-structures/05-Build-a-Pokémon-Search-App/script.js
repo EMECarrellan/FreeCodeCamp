@@ -51,8 +51,9 @@ const pokemonInfo = (data) => {
   $types.textContent = "";
   $types.textContent = $types.innerHTML = ""; // Limpia los tipos anteriores
   data.types.forEach(typeInfo => {
-    const typeElement = document.createElement('div');
+    const typeElement = document.createElement('span');
     typeElement.textContent = typeInfo.type.name.toUpperCase();
+    typeElement.classList.add('border-2', 'border-black', 'py-1', 'p-2', 'rounded-full');
     $types.appendChild(typeElement);
   });
   $hp.textContent = data.stats.find(stat => stat.stat.name === "hp").base_stat;
@@ -61,7 +62,7 @@ const pokemonInfo = (data) => {
   $speciaAttack.textContent = data.stats.find(stat => stat.stat.name === "special-attack").base_stat;
   $specialDefense.textContent = data.stats.find(stat => stat.stat.name === "special-defense").base_stat;
   $speed.textContent = data.stats.find(stat => stat.stat.name === "speed").base_stat;
-  $img.innerHTML = ` <div>
+  $img.innerHTML = ` <div class="flex justify-center content-center p-6">
                 <img id="sprite" src="${data.sprites.front_default}" alt="">
             </div>`
 };

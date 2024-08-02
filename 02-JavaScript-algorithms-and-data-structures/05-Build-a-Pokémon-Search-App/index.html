@@ -17,24 +17,25 @@
     <link href="./output.css" rel="stylesheet">
     <script type="module" src="script.js"></script>
   </head>
-  <body class="font-display">
-    <header>
+  <body class="overflow-x-hidden w-dvw min-h-screen font-display flex flex-col justify-evenly items-center py-6">
+    <header class="text-center w-5/6 md:max-w-[600px]">
       <h1 class="text-3xl font-bold">Pokeapi</h1>
       <p>Ingresa el nombre de un Pokémon para obtener información detallada.</p>
-    </header>
-
-    <main>
-      <section id="search-section">
-        <label for="search-input">Nombre del Pokémon:</label>
-        <input type="text" id="search-input" placeholder="Gyarados" required />
-        <button id="search-button">Buscar</button>
+      <section id="search-section" class="flex flex-col justify-center pt-6">
+        <label class="text-left mb-2" for="search-input">Nombre del Pokémon:</label>
+        <input class="pl-2 py-2" type="text" id="search-input" placeholder="Gyarados" required />
+        <button class=" bg-sky-500 text-white px-3 py-1 rounded-md hover:bg-sky-700" id="search-button">Buscar</button>
       </section>
 
-      <section id="pokemon-img"></section>
+      <section class="h-[180px] flex justify-center" id="pokemon-img"></section>
 
       <section id="pokemon-info">
-        <div>
-          <h2>Información del Pokémon</h2>
+    </header>
+
+    <main class="w-5/6 md:max-w-[600px]">
+          <details class="list-none py-2 px-4 rounded-md bg-sky-50 text-sky-950">
+            <summary class="">Información del Pokémon</summary>
+          <div>
           <h3>Nombre:</h3>
           <p id="pokemon-name"></p>
         </div>
@@ -78,11 +79,12 @@
           <h3>Velocidad:</h3>
           <p id="speed"></p>
         </div>
+        </details>
       </section>
     </main>
 
-    <footer>
-      <p>EmeCarrellan - 2024 Buscador de Pokémon.</p>
+    <footer class="mt-auto pt-4 w-5/6">
+      <small>EmeCarrellan - 2024 Buscador de Pokémon.</small>
     </footer>
   </body>
 </html>

@@ -13,47 +13,22 @@ const $defense = $("defense");
 const $speciaAttack = $("special-attack");
 const $specialDefense = $("special-defense");
 const $speed = $("speed");
+const $img = $("pokemon-img")
 
 let pokemonData = [];
+let pokemonAttributes = [];
 
 const fetchData = async () => {
   try {
-    const res = await fetch(pokemonList);
-    const data = await res.json();
-    pokemonData = data.results;
-    showPokemon(pokemonData);
+    const res = await fetch(pokemonList)
+    const data = await res.json()
+    pokemonData = data.results
   } catch (err) {
-    console.log(err);
+    console.log(err)
   }
-};
+}
 
-fetchData();
-
-const showPokemon = (data) => {
-  console.log(data);
-};
-
-$searchBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const basicInfo = pokemonNameOrId();
-  if (basicInfo) console.log(basicInfo.url);
-  else alert("Pokémon not found");
-  pokemonInfo(basicInfo);
-  // Cuando buscas 1 o bulbasaur tiene que acceder a https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/1/
-  // Del este último link se accede a cada atributo y se muestra en el textcontent de la id correspondiente
-});
-
-$searchInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    const basicInfo = pokemonNameOrId();
-    if (basicInfo) console.log(basicInfo.url);
-    else alert("Pokémon not found");
-    pokemonInfo(basicInfo);
-  }
-  // Cuando buscas 1 o bulbasaur tiene que acceder a https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/1/
-  // Del este último link se accede a cada atributo y se muestra en el textcontent de la id correspondiente
-});
+fetchData()
 
 const pokemonNameOrId = () => {
   if (isNaN($searchInput.value)) {
@@ -67,21 +42,63 @@ const pokemonNameOrId = () => {
   }
 };
 
-const findPokemonById = (id) =>
-  pokemonData.find((pokemon) =>
-    pokemon.id.toString().includes($searchInput.value)
-  );
-
-const pokemonInfo = (obj) => {
-  $name.textContent = obj.name.charAt(0).toUpperCase() + obj.name.slice(1);
-  $id.textContent = obj.id;
-  $weight.textContent = 0;
-  $height.textContent = 0;
-  $types.textContent = 0;
-  $hp.textContent = 0;
-  $attack.textContent = 0;
-  $defense.textContent = 0;
-  $speciaAttack.textContent = 0;
-  $specialDefense.textContent = 0;
-  $speed.textContent = 0;
+const pokemonInfo = (data) => {
+  $name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+  $id.textContent = data.id;
+  $weight.textContent = data.weight;
+  $height.textContent = data.height;
+  $types.innerHTML = "";
+  $types.textContent = "";
+  $types.textContent = $types.innerHTML = ""; // Limpia los tipos anteriores
+  data.types.forEach(typeInfo => {
+    const typeElement = document.createElement('div');
+    typeElement.textContent = typeInfo.type.name.toUpperCase();
+    $types.appendChild(typeElement);
+  });
+  $hp.textContent = data.stats.find(stat => stat.stat.name === "hp").base_stat;
+  $attack.textContent = data.stats.find(stat => stat.stat.name === "attack").base_stat;
+  $defense.textContent = data.stats.find(stat => stat.stat.name === "defense").base_stat;
+  $speciaAttack.textContent = data.stats.find(stat => stat.stat.name === "special-attack").base_stat;
+  $specialDefense.textContent = data.stats.find(stat => stat.stat.name === "special-defense").base_stat;
+  $speed.textContent = data.stats.find(stat => stat.stat.name === "speed").base_stat;
+  $img.innerHTML = ` <div>
+                <img id="sprite" src="${data.sprites.front_default}" alt="">
+            </div>`
 };
+
+$searchBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const basicInfoList = pokemonNameOrId();
+  if (basicInfoList) console.log(basicInfoList.url);
+  else alert("Pokémon not found");
+  const pokemonListAttributes = basicInfoList.url;
+  const fetchAttributes = async () => {
+      try {
+          const res = await fetch(pokemonListAttributes);
+          pokemonAttributes = await res.json();
+        pokemonInfo(pokemonAttributes);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    fetchAttributes();
+});
+
+$searchInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    const basicInfoList = pokemonNameOrId();
+    if (basicInfoList) console.log(basicInfoList.url);
+    else alert("Pokémon not found");
+    const pokemonListAttributes = basicInfoList.url;
+    const fetchAttributes = async () => {
+        try {
+            const res = await fetch(pokemonListAttributes);
+            pokemonAttributes = await res.json();
+          pokemonInfo(pokemonAttributes);
+          } catch (err) {
+              console.log(err);
+          }
+      };
+      fetchAttributes();
+  }
+});

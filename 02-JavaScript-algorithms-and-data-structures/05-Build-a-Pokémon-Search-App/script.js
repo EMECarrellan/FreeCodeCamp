@@ -89,10 +89,7 @@ const pokemonInfo = (data) => {
 
   mainContainer.innerHTML = `
     <img id="sprite" src="${data.sprites.front_default}" class="hover:scale-125 hover:ease-in-out duration-500" alt="">
-    <p>${$name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1)} #${$id.textContent = data.id}</p>
-    <div class="flex justify-center items-center mt-2">
-        <p class="flex flex-row" id="types"></p>
-    </div>
+    <p class="font-bold text-black drop-shadow-[0_1.2px_1.2px_rgba(255,255,255,1)]">${$name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1)} #${$id.textContent = data.id}</p>
   `;
 
   $img.innerHTML = ""; // Limpia cualquier contenido previo

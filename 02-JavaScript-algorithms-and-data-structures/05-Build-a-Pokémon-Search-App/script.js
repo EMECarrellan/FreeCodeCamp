@@ -43,8 +43,7 @@ const pokemonNameOrId = () => {
 };
 
 const pokemonInfo = (data) => {
-  $name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-  $id.textContent = data.id;
+
   $weight.textContent = data.weight;
   $height.textContent = data.height;
   $types.innerHTML = "";
@@ -62,8 +61,9 @@ const pokemonInfo = (data) => {
   $speciaAttack.textContent = data.stats.find(stat => stat.stat.name === "special-attack").base_stat;
   $specialDefense.textContent = data.stats.find(stat => stat.stat.name === "special-defense").base_stat;
   $speed.textContent = data.stats.find(stat => stat.stat.name === "speed").base_stat;
-  $img.innerHTML = ` <div class="flex justify-center content-center p-6">
-                <img id="sprite" src="${data.sprites.front_default}" alt="">
+  $img.innerHTML = ` <div class="flex justify-center flex-col my-4 content-center p-6 bg-sky-50 rounded-lg py-2">
+                <img id="sprite" src="${data.sprites.front_default}" class="hover:scale-125 hover:ease-in-out duration-500" alt="">
+                <p>${$name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1)} #${$id.textContent = data.id}</p>
             </div>`
 };
 

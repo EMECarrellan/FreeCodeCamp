@@ -19,7 +19,7 @@
   </head>
   <body class="overflow-x-hidden w-dvw min-h-screen font-display flex flex-col justify-evenly items-center py-6">
     <header class="text-center w-5/6 md:max-w-[600px]">
-      <h1 class="text-3xl font-bold">Pokeapi</h1>
+      <h1 class="text-5xl font-bold mb-3">Pokeapi</h1>
       <p>Ingresa el nombre de un Pokémon para obtener información detallada.</p>
       <section id="search-section" class="flex flex-col justify-center pt-6">
         <label class="text-left mb-2" for="search-input">Nombre del Pokémon:</label>
@@ -27,19 +27,23 @@
         <button class=" bg-sky-500 text-white px-3 py-1 rounded-md hover:bg-sky-700" id="search-button">Buscar</button>
       </section>
 
-      <section class="h-[180px] flex justify-center" id="pokemon-img"></section>
+      <section class="min-h-[180px] flex justify-center" id="pokemon-img"></section>
+
+      <div class="h-fit">
+        <p class="h-fit" id="types"></p>
+      </div>
 
       <section id="pokemon-info">
     </header>
 
     <main class="w-5/6 md:max-w-[600px]">
           <details class="list-none py-2 px-4 rounded-md bg-sky-50 text-sky-950">
-            <summary class="">Información del Pokémon</summary>
-          <div>
+            <summary class="hover:cursor-pointer">Información del Pokémon</summary>
+          <div hidden>
           <h3>Nombre:</h3>
           <p id="pokemon-name"></p>
         </div>
-        <div>
+        <div hidden>
           <h3>ID:</h3>
           <p id="pokemon-id"></p>
         </div>
@@ -50,10 +54,6 @@
         <div>
           <h3>Altura:</h3>
           <p id="height"></p>
-        </div>
-        <div>
-          <h3>Tipos:</h3>
-          <p id="types"></p>
         </div>
         <div>
           <h3>HP:</h3>

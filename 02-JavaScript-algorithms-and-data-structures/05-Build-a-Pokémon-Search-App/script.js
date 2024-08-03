@@ -44,15 +44,37 @@ const pokemonNameOrId = () => {
 
 const pokemonInfo = (data) => {
 
+    const typeColors = {
+        normal: "#A8A77A",
+        fire: "#EE8130",
+        water: "#6390F0",
+        electric: "#F7D02C",
+        grass: "#7AC74C",
+        ice: "#96D9D6",
+        fighting: "#C22E28",
+        poison: "#A33EA1",
+        ground: "#E2BF65",
+        flying: "#A98FF3",
+        psychic: "#F95587",
+        bug: "#A6B91A",
+        rock: "#B6A136",
+        ghost: "#735797",
+        dragon: "#6F35FC",
+        dark: "#705746",
+        steel: "#B7B7CE",
+        fairy: "#D685AD",
+      };
+
   $weight.textContent = data.weight;
   $height.textContent = data.height;
   $types.innerHTML = "";
   $types.textContent = "";
-  $types.textContent = $types.innerHTML = ""; // Limpia los tipos anteriores
+  $types.textContent = $types.innerHTML = "";
   data.types.forEach(typeInfo => {
     const typeElement = document.createElement('span');
     typeElement.textContent = typeInfo.type.name.toUpperCase();
-    typeElement.classList.add('border-2', 'border-black', 'py-1', 'p-2', 'rounded-full');
+    typeElement.style.backgroundColor = typeColors[typeInfo.type.name] || "#ccc"
+    typeElement.classList.add('py-1', 'p-3', 'rounded-full', 'mx-1', 'font-bold','text-white');
     $types.appendChild(typeElement);
   });
   $hp.textContent = data.stats.find(stat => stat.stat.name === "hp").base_stat;
@@ -61,10 +83,20 @@ const pokemonInfo = (data) => {
   $speciaAttack.textContent = data.stats.find(stat => stat.stat.name === "special-attack").base_stat;
   $specialDefense.textContent = data.stats.find(stat => stat.stat.name === "special-defense").base_stat;
   $speed.textContent = data.stats.find(stat => stat.stat.name === "speed").base_stat;
-  $img.innerHTML = ` <div class="flex justify-center flex-col my-4 content-center p-6 bg-sky-50 rounded-lg py-2">
-                <img id="sprite" src="${data.sprites.front_default}" class="hover:scale-125 hover:ease-in-out duration-500" alt="">
-                <p>${$name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1)} #${$id.textContent = data.id}</p>
-            </div>`
+  const mainContainer = document.createElement('div');
+  mainContainer.classList.add("flex", "justify-center", "flex-col", "mt-4", "mb-2", "content-center", "p-6", "rounded-lg", "py-2");
+  mainContainer.style.background = `radial-gradient(circle, rgba(255,255,255,0.3), ${typeColors[data.types[0].type.name] || "#ccc"})`;
+
+  mainContainer.innerHTML = `
+    <img id="sprite" src="${data.sprites.front_default}" class="hover:scale-125 hover:ease-in-out duration-500" alt="">
+    <p>${$name.textContent = data.name.charAt(0).toUpperCase() + data.name.slice(1)} #${$id.textContent = data.id}</p>
+    <div class="flex justify-center items-center mt-2">
+        <p class="flex flex-row" id="types"></p>
+    </div>
+  `;
+
+  $img.innerHTML = ""; // Limpia cualquier contenido previo
+  $img.appendChild(mainContainer); // Agrega el nuevo contenedor al DOM
 };
 
 $searchBtn.addEventListener("click", (e) => {

@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-h3 {
-    @apply text-lg font-bold;
-  }
+details p {
+    @apply bg-white text-indigo-500 px-2 py-1 rounded-full font-semibold;
+}
